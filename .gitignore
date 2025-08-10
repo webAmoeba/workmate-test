@@ -5,6 +5,11 @@ build/
 dist/
 wheels/
 *.egg-info
+*.pyc
+**/.DS_Store
+.coverage
+coverage.xml
+*_cache/
 
 # Virtual environments
 .venv
