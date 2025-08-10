@@ -12,3 +12,6 @@ dev = [
     "pytest-cov>=6.2.1",
     "ruff>=0.12.8",
 ]
+
+[project.scripts]
+workmate = "main:main"
