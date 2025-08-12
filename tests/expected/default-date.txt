@@ -1,0 +1,9 @@
+
+      Report Default (2025-06-22)      
+   handler                        time      
+----------------------------------------
+0  /api/context/...               0.024     
+1  /api/homeworks/...             0.2       
+2  /api/context/...               0.036     
+3  /api/homeworks/...             0.06      
+4  /api/context/...               0.028

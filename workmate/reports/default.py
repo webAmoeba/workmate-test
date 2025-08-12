@@ -7,9 +7,9 @@ def make_report(records: list[dict], date_filter: str | None = None) -> None:
     col_width_index = len(str(len(records))) + 1
     total_width = col_width_index + COL_WIDTH_HANDLER + COL_WIDTH_TIME - 2
     if date_filter:
-        title_text = f"Report Default- ({date_filter})"
+        title_text = f"Report Default ({date_filter})"
     else:
-        title_text = "Report Default78"
+        title_text = "Report Default"
     title = (
         title_text
         if len(title_text) >= total_width

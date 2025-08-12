@@ -1,0 +1,24 @@
+
+              Report Default             
+    handler                        time      
+-----------------------------------------
+0   /api/context/...               0.024     
+1   /api/homeworks/...             0.076     
+2   /api/context/...               0.024     
+3   /api/specializations/...       0.016     
+4   /api/context/...               0.032     
+5   /api/context/...               0.072     
+6   /api/context/...               0.072     
+7   /api/context/...               0.032     
+8   /api/context/...               0.032     
+9   /api/context/...               0.032     
+10  /api/context/...               0.032     
+11  /api/context/...               0.032     
+12  /api/context/...               0.032     
+13  /api/homeworks/...             0.2       
+14  /api/context/...               0.036     
+15  /api/homeworks/...             0.06      
+16  /api/context/...               0.028     
+17  /api/context/...               0.008     
+18  /api/context/...               0.008     
+19  /api/context/...               0.012

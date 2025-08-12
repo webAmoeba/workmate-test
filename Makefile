@@ -33,4 +33,7 @@ test:
 test-vv:
 	uv run pytest -vv
 
+test-cov:
+	uv run pytest -q --cov=workmate --cov-report=term-missing
+
 check: test lint

@@ -1,0 +1,7 @@
+
+                         Report Average                        
+   handler                        total      avg_response_time
+---------------------------------------------------------------
+0  /api/context/...               16         0.032          
+1  /api/homeworks/...             3          0.112          
+2  /api/specializations/...       1          0.016
