@@ -48,9 +48,10 @@ def make_average_report(records: list[dict]) -> None:
         f"{{:<{COL_WIDTH_TOTAL}}} "
         f"{{:<{COL_WIDTH_AVG}.3f}}"
     )
-
     lines: list[str] = ["", title, header, separator]
-    for index, (url, (cnt, sum_rt)) in enumerate(stats.items()):
+    sorted_stats = sorted(stats.items(), key=lambda x: x[1][0], reverse=True)
+
+    for index, (url, (cnt, sum_rt)) in enumerate(sorted_stats):
         avg = sum_rt / cnt
         lines.append(row_format.format(index, url, cnt, avg))
 

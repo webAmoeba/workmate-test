@@ -28,10 +28,9 @@ def main() -> None:
         choices=["average", "avg"],
         help="Report type (default if omitted)",
     )
-
     args = parser.parse_args()
-
     all_records: list[dict] = []
+
     for file_name in args.file:
         path = Path(file_name)
         try:
