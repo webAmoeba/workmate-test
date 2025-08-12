@@ -4,7 +4,8 @@ from pathlib import Path
 
 from core.read_file import read_file
 from core.utils import log_traceback
-from reports.make_report import make_report
+from reports.average import make_average_report
+from reports.default import make_report
 
 
 def main() -> None:
@@ -24,9 +25,7 @@ def main() -> None:
     parser.add_argument(
         "--report",
         nargs="?",
-        const="default",
-        default="default",
-        choices=["average", "default"],
+        choices=["average", "avg"],
         help="Report type (default if omitted)",
     )
 
@@ -57,7 +56,10 @@ def main() -> None:
             log_traceback()
             sys.exit(1)
 
-    make_report(all_records)
+    if not args.report:
+        make_report(all_records)
+    elif args.report in ("avg", "average"):
+        make_average_report(all_records)
 
 
 if __name__ == "__main__":

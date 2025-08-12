@@ -27,12 +27,12 @@ def read_file(path: Path) -> list[dict]:
 
     if broken_count:
         with open("workmate_error.log", "a", encoding="utf-8") as lf:
-            lf.write("\n" + "=" * 160 + "\n")
+            lf.write("=" * 60 + "\n")
             lf.write(f"[{datetime.now().isoformat()}] Broken JSON in {path}\n")
             lf.write(f"Total broken lines: {broken_count}\n")
             lf.write(f"First broken line content: {first_broken_line}\n")
         print(
-            f"Warning: {broken_count} broken JSON line(s) found in {path} "
+            f"\nWarning: {broken_count} broken JSON line(s) found in {path} "
             f"(details in workmate_error.log)",
             file=sys.stderr,
         )
