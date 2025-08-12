@@ -31,10 +31,10 @@ def read_file(path: Path) -> list[dict]:
             lf.write(f"[{datetime.now().isoformat()}] Broken JSON in {path}\n")
             lf.write(f"Total broken lines: {broken_count}\n")
             lf.write(f"First broken line content: {first_broken_line}\n")
-            print(
-                f"Warning: {broken_count} broken JSON line(s) found in {path} "
-                f"(details in workmate_error.log)",
-                file=sys.stderr,
-            )
+        print(
+            f"Warning: {broken_count} broken JSON line(s) found in {path} "
+            f"(details in workmate_error.log)",
+            file=sys.stderr,
+        )
 
     return records

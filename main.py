@@ -21,6 +21,15 @@ def main() -> None:
         metavar="LOG_PATH",
         help="Path to log file(s)",
     )
+    parser.add_argument(
+        "--report",
+        nargs="?",
+        const="default",
+        default="default",
+        choices=["average", "default"],
+        help="Report type (default if omitted)",
+    )
+
     args = parser.parse_args()
 
     all_records: list[dict] = []
