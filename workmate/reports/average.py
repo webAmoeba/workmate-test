@@ -2,6 +2,8 @@ COL_WIDTH_HANDLER = 30
 COL_WIDTH_TOTAL = 10
 COL_WIDTH_AVG = 15
 
+ALIASES = ["avg"]
+
 
 def make_average_report(records: list[dict]) -> None:
     """Prints a table with handler, total and avg_response_time per handler."""
@@ -48,11 +50,15 @@ def make_average_report(records: list[dict]) -> None:
         f"{{:<{COL_WIDTH_TOTAL}}} "
         f"{{:<{COL_WIDTH_AVG}.3f}}"
     )
-    lines: list[str] = ["", title, header, separator]
     sorted_stats = sorted(stats.items(), key=lambda x: x[1][0], reverse=True)
+    lines: list[str] = ["", title, header, separator]
 
     for index, (url, (cnt, sum_rt)) in enumerate(sorted_stats):
         avg = sum_rt / cnt
         lines.append(row_format.format(index, url, cnt, avg))
 
     print("\n".join(lines))
+
+
+def make_report(records: list[dict]) -> None:
+    make_average_report(records)

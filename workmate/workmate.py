@@ -1,18 +1,35 @@
 import argparse
+import importlib
+import pkgutil
 import sys
 from pathlib import Path
 
+import workmate.reports as reports_pkg
 from workmate.core.read_file import read_file
 from workmate.core.utils import log_traceback
-from workmate.reports.average import make_average_report
-from workmate.reports.default import make_report
+
+
+def discover_reports() -> dict[str, callable]:
+    """Searches all modules in workmate.reports
+    with function make_report(records)."""
+    discovered: dict[str, callable] = {}
+    for _, module_name, _ in pkgutil.iter_modules(reports_pkg.__path__):
+        mod = importlib.import_module(f"{reports_pkg.__name__}.{module_name}")
+        fn = getattr(mod, "make_report", None)
+        if callable(fn):
+            discovered[module_name] = fn
+
+            for alias in getattr(mod, "ALIASES", []):
+                discovered.setdefault(alias, fn)
+    return discovered
 
 
 def main() -> None:
+    report_funcs = discover_reports()
     parser = argparse.ArgumentParser(
         prog="workmate",
         description="Process JSON log files and generate a report",
-        epilog=("Example:\nworkmate --file e1.log e2.log"),
+        epilog="Example:\n  workmate --file e1.log e2.log [--report average]",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
@@ -25,7 +42,7 @@ def main() -> None:
     parser.add_argument(
         "--report",
         nargs="?",
-        choices=["average", "avg"],
+        choices=sorted(report_funcs.keys()),
         help="Report type (default if omitted)",
     )
     args = parser.parse_args()
@@ -34,8 +51,7 @@ def main() -> None:
     for file_name in args.file:
         path = Path(file_name)
         try:
-            file_records = read_file(path)
-            all_records.extend(file_records)
+            all_records.extend(read_file(path))
         except FileNotFoundError:
             print(f"Error: file not found: {path}", file=sys.stderr)
             log_traceback()
@@ -55,10 +71,8 @@ def main() -> None:
             log_traceback()
             sys.exit(1)
 
-    if not args.report:
-        make_report(all_records)
-    elif args.report in ("avg", "average"):
-        make_average_report(all_records)
+    report_name = args.report or "default"
+    report_funcs[report_name](all_records)
 
 
 if __name__ == "__main__":
