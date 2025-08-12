@@ -5,7 +5,9 @@ COL_WIDTH_AVG = 15
 ALIASES = ["avg"]
 
 
-def make_average_report(records: list[dict]) -> None:
+def make_average_report(
+    records: list[dict], date_filter: str | None = None
+) -> None:
     """Prints a table with handler, total and avg_response_time per handler."""
     stats: dict[str, tuple[int, float]] = {}
 
@@ -29,9 +31,12 @@ def make_average_report(records: list[dict]) -> None:
         + COL_WIDTH_HANDLER
         + COL_WIDTH_TOTAL
         + COL_WIDTH_AVG
-        - 6
+        + 6
     )
-    title_text = "Report Average"
+    if date_filter:
+        title_text = f"Report Average ({date_filter})"
+    else:
+        title_text = "Report Average"
     title = (
         title_text
         if len(title_text) >= total_width
@@ -60,5 +65,5 @@ def make_average_report(records: list[dict]) -> None:
     print("\n".join(lines))
 
 
-def make_report(records: list[dict]) -> None:
-    make_average_report(records)
+def make_report(records: list[dict], date_filter: str | None = None) -> None:
+    make_average_report(records, date_filter)

@@ -73,7 +73,7 @@ def main() -> None:
         ]
 
     report_name = args.report or "default"
-    report_funcs[report_name](all_records)
+    report_funcs[report_name](all_records, args.date if args.date else None)
 
 
 if __name__ == "__main__":

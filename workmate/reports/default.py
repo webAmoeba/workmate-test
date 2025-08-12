@@ -2,11 +2,14 @@ COL_WIDTH_HANDLER = 30
 COL_WIDTH_TIME = 10
 
 
-def make_report(records: list[dict]) -> None:
+def make_report(records: list[dict], date_filter: str | None = None) -> None:
     """Prints a table with handler and time from each record."""
     col_width_index = len(str(len(records))) + 1
     total_width = col_width_index + COL_WIDTH_HANDLER + COL_WIDTH_TIME - 2
-    title_text = "Report Default"
+    if date_filter:
+        title_text = f"Report Default- ({date_filter})"
+    else:
+        title_text = "Report Default78"
     title = (
         title_text
         if len(title_text) >= total_width
