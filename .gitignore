@@ -14,5 +14,4 @@ coverage.xml
 # Virtual environments
 .venv
 
-workmate_error.log
-s/
+*.log
