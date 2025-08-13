@@ -1,3 +1,8 @@
+from colorama import Fore, Style, init
+
+init(autoreset=True)
+
+
 COL_WIDTH_HANDLER = 30
 COL_WIDTH_TIME = 10
 
@@ -7,9 +12,11 @@ def make_report(records: list[dict], date_filter: str | None = None) -> None:
     col_width_index = len(str(len(records))) + 1
     total_width = col_width_index + COL_WIDTH_HANDLER + COL_WIDTH_TIME - 2
     if date_filter:
-        title_text = f"Report Default ({date_filter})"
+        title_text = (
+            Fore.CYAN + f"Report Default ({date_filter})" + Style.RESET_ALL
+        )
     else:
-        title_text = "Report Default"
+        title_text = Fore.CYAN + "Report Default" + Style.RESET_ALL
     title = (
         title_text
         if len(title_text) >= total_width
