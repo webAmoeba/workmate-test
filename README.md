@@ -45,4 +45,4 @@ workmate -h
 
 ## Asciinema
 
-[![asciicast](https://asciinema.org/a/cy1EPxA3fvO5rjlG0YlVrwIS5.svg)](https://asciinema.org/a/cy1EPxA3fvO5rjlG0YlVrwIS5)
+[![asciicast](https://asciinema.org/a/eohYJQv0vfoQ21SpqACejzaFe.svg)](https://asciinema.org/a/eohYJQv0vfoQ21SpqACejzaFe)

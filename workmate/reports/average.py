@@ -1,7 +1,3 @@
-from colorama import Fore, Style, init
-
-init(autoreset=True)
-
 COL_WIDTH_HANDLER = 30
 COL_WIDTH_TOTAL = 10
 COL_WIDTH_AVG = 15
@@ -38,11 +34,9 @@ def make_average_report(
         + 6
     )
     if date_filter:
-        title_text = (
-            Fore.CYAN + f"Report Average ({date_filter})" + Style.RESET_ALL
-        )
+        title_text = f"Report Average ({date_filter})"
     else:
-        title_text = Fore.CYAN + "Report Average" + Style.RESET_ALL
+        title_text = "Report Average"
     title = (
         title_text
         if len(title_text) >= total_width
