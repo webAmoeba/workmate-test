@@ -2,6 +2,10 @@ import sys
 import traceback
 from datetime import datetime
 
+from colorama import Fore, init
+
+init(autoreset=True)
+
 
 def log_traceback() -> None:
     with open("workmate_error.log", "a", encoding="utf-8") as lf:
@@ -19,7 +23,8 @@ def parse_date_arg(date_str: str) -> str:
     parts = date_str.split("-")
     if len(parts) != 3:
         print(
-            "Error: --date must be in YYYY-MM-DD (or YYYY-DD-MM) format.",
+            Fore.RED
+            + "Error: --date must be in YYYY-MM-DD (or YYYY-DD-MM) format.",
             file=sys.stderr,
         )
         sys.exit(2)
@@ -29,7 +34,10 @@ def parse_date_arg(date_str: str) -> str:
         a = int(parts[1])
         b = int(parts[2])
     except ValueError:
-        print("Error: --date contains non-numeric parts.", file=sys.stderr)
+        print(
+            Fore.RED + "Error: --date contains non-numeric parts.",
+            file=sys.stderr,
+        )
         sys.exit(2)
 
     if 1 <= a <= 12 and 1 <= b <= 31:  # expected
@@ -37,7 +45,9 @@ def parse_date_arg(date_str: str) -> str:
     elif 1 <= a <= 31 and 1 <= b <= 12:  # USA format
         m, d = b, a
     else:
-        print("Error: --date values are out of range.", file=sys.stderr)
+        print(
+            Fore.RED + "Error: --date values are out of range.", file=sys.stderr
+        )
         sys.exit(2)
 
     return f"{y:04d}-{m:02d}-{d:02d}"

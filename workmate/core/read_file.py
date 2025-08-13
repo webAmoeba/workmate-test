@@ -3,6 +3,10 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+from colorama import Fore, Style, init
+
+init(autoreset=True)
+
 
 def read_file(path: Path) -> list[dict]:
     """Reads a file in UTF-8, parses JSON strings
@@ -32,7 +36,9 @@ def read_file(path: Path) -> list[dict]:
             lf.write(f"Total broken lines: {broken_count}\n")
             lf.write(f"First broken line content: {first_broken_line}\n")
         print(
-            f"\nWarning: {broken_count} broken JSON line(s) found in {path} "
+            Fore.YELLOW + 
+            f"\nWarning: {broken_count} broken JSON line(s) found in "
+            f"{Style.BRIGHT}{path}\n"
             f"(details in workmate_error.log)",
             file=sys.stderr,
         )

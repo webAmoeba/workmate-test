@@ -2,9 +2,13 @@ import argparse
 import sys
 from pathlib import Path
 
+from colorama import Fore, Style, init
+
 from workmate.core.read_file import read_file
 from workmate.core.utils import log_traceback, parse_date_arg
 from workmate.reports import discover_reports
+
+init(autoreset=True)
 
 
 def main() -> None:
@@ -46,20 +50,32 @@ def main() -> None:
         try:
             all_records.extend(read_file(path))
         except FileNotFoundError:
-            print(f"Error: file not found: {path}", file=sys.stderr)
+            print(
+                Fore.RED + f"Error: file not found: {Style.BRIGHT}{path}",
+                file=sys.stderr,
+            )
             log_traceback()
             sys.exit(1)
         except PermissionError:
-            print(f"Error: permission denied: {path}", file=sys.stderr)
+            print(
+                Fore.RED + f"Error: permission denied: {Style.BRIGHT}{path}",
+                file=sys.stderr,
+            )
             log_traceback()
             sys.exit(1)
         except UnicodeDecodeError:
-            print(f"Error: file is not UTF-8 text: {path}", file=sys.stderr)
+            print(
+                Fore.RED
+                + f"Error: file is not UTF-8 text: {Style.BRIGHT}{path}",
+                file=sys.stderr,
+            )
             log_traceback()
             sys.exit(1)
         except Exception as e:
             print(
-                f"Unexpected error while reading {path}: {e}", file=sys.stderr
+                Fore.RED
+                + f"Unexpected error while reading {Style.BRIGHT}{path}: {e}",
+                file=sys.stderr,
             )
             log_traceback()
             sys.exit(1)
@@ -67,7 +83,8 @@ def main() -> None:
     if args.date:
         date_prefix = parse_date_arg(args.date)
         all_records = [
-            record for record in all_records
+            record
+            for record in all_records
             if isinstance(record.get("@timestamp"), str)
             and record["@timestamp"].startswith(date_prefix)
         ]
