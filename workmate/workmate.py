@@ -14,9 +14,9 @@ def main() -> None:
         description="Process JSON log files and generate a report",
         epilog=(
             "Examples:\n"
-            "workmate --file e1.log e2.log\n"
-            "workmate --file e1.log e2.log --report average\n"
-            "workmate --file e1.log e2.log --report average --date 2025-06-22"
+            "  workmate --file e1.log e2.log\n"
+            "  workmate --file e1.log e2.log --report average\n"
+            "  workmate --file e1.log e2.log --report average --date 2025-06-22"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
